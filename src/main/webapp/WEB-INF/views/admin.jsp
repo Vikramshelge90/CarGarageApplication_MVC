@@ -247,8 +247,8 @@
 
 
 
-			<li><a href="#"> <i class="bx bx-list-ul"></i> <span
-					class="links_name">Order list</span>
+			<li><a href="servicedetailspage"> <i class='bx bxs-cart-add'></i><span
+					class="links_name">Services</span>
 			</a></li>
 			<li><a href="#"> <i class="bx bx-pie-chart-alt-2"></i> <span
 					class="links_name">Analytics</span>
