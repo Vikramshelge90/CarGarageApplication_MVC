@@ -127,6 +127,8 @@ public class UserHandleController {
 	@RequestMapping("/goingtoupdate")
 	public String updatedUser(UserDetailsModel userDetailsModel,Model model) {
 		
+		
+		if(userDetailsModel==null) {
 		UserDetailsModel olddetails=userService.getSelectedUsersByID(userDetailsModel.getUserid());
 		
 		UserDetailsModel gettingUpdatedUser=userService.getUpdatedUser(userDetailsModel);
@@ -152,6 +154,10 @@ public class UserHandleController {
 		model.addAttribute("vehicles",getAllSelectedVehicles);
 		/* return "userAddUpdate"; */
 		return "admin2";
+		}else {
+			model.addAttribute("msg","Please Fill the Data");
+			return "admin2";
+		}
 
 	}
 	

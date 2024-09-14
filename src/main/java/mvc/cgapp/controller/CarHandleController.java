@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,9 +113,26 @@ public class CarHandleController {
 		
 		model.addAttribute("techies", getalltechies);
 		
-		
-		return "addvehiclepage";
+		return "carpage3";
+		//return "addvehiclepage";
 	}
+	
+	@GetMapping("/checkVehicleNumber")
+    @ResponseBody
+    public String checkVehicleExists(@RequestParam("vehicleNumber") String vehicleNumber) {
+        
+		System.out.println("run time vehicle number is "+vehicleNumber);
+		boolean exists = userVehicleService.checkIfVehicleExists(vehicleNumber);
+		System.out.println(exists);
+        // Return 'exists' if vehicle is found in the database, otherwise return 'not exists'
+        if (exists) {
+        	System.out.println("yes");
+            return "exists";
+        } else {
+        	System.out.println("not");
+            return "not exists";
+        }
+    }
 	
 	@PostMapping("/addingnewcardetails")
 	public String addingNewCardetails(VehicleFormModel vehicleFormModel,Model model) {
@@ -129,8 +147,13 @@ public class CarHandleController {
 		else {
 			model.addAttribute("msg","data not added");
 		}
-		return "addvehiclepage";
+		return "carpage3";
+		//return "addvehiclepage";
 	}
+	
+	
+	
+	
 	
 	@RequestMapping("/updateforcar")
 	public String updateForCar(@RequestParam("VisitID") int vvid,Model model,@ModelAttribute("userinfo") UserDetailsModel userDetailsModel) {
@@ -143,13 +166,17 @@ public class CarHandleController {
 		
 		try{
 			selectedUser=userService.getSelectedUsersByVisitID(vvid);
+			model.addAttribute("customer",selectedUser);
+			model.addAttribute("carinfo",vehicleFormModel);
+			return "carpage2";
 		}
-		catch(Exception ex) {}
-		System.out.println(selectedUser.getUseremail());
-		model.addAttribute("customer",selectedUser);
-		model.addAttribute("carinfo",vehicleFormModel);
+		catch(Exception ex) {
+			return "redirect:/searchcar";
+		}
 		
-		return "carpage2";
+		
+		
+		
 		/* return "carupdatepage"; */
 	}
 

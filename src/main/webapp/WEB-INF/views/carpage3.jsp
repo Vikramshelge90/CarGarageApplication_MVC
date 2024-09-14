@@ -41,16 +41,8 @@
 }
 
 .form-group input[type="text"], .form-group input[type="date"],
-	.form-group input[type="date"], .form-group textarea {
-	width: 100%;
-	padding: 10px 15px;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	font-size: 16px;
-	transition: border-color 0.3s ease;
-}
-
-.form-group select {
+	.form-group input[type="number"], .form-group textarea, .form-group select
+	{
 	width: 100%;
 	padding: 10px 15px;
 	border: 1px solid #ccc;
@@ -256,10 +248,10 @@
 			<li><a href="servicedetailspage"> <i class='bx bxs-cart-add'></i><span
 					class="links_name">Services</span>
 			</a></li>
+
 			<li><a href="#"> <i class='bx bxs-spreadsheet'></i> <span
 					class="links_name">Reports</span>
 			</a></li>
-
 
 			<li><a href="#"> <i class="bx bx-list-ul"></i> <span
 					class="links_name">Order list</span>
@@ -280,7 +272,9 @@
 			<li><a href="#"> <i class="bx bx-heart"></i> <span
 					class="links_name">Favrorites</span>
 			</a></li>
-
+			<li><a href="#"> <i class='bx bxs-spreadsheet'></i> <span
+					class="links_name">Reports</span>
+			</a></li>
 			<li class="log_out"><a href="logoutbtn"> <i
 					class="bx bx-log-out"></i> <span class="links_name">Log out</span>
 			</a></li>
@@ -289,8 +283,7 @@
 	<section class="home-section">
 		<nav>
 			<div class="sidebar-button">
-				<i class="bx bx-menu sidebarBtn"></i> <span class="dashboard">Car
-					Dashboard</span>
+				<i class="bx bx-menu sidebarBtn"></i> <span class="dashboard">Dashboard</span>
 			</div>
 			<!-- <div class="search-box">
           <input type="text" placeholder="Search..." />
@@ -305,73 +298,83 @@
 			<div class="overview-boxes">
 				<div class="box">
 					<div class="right-side">
-						<div class="box-topic">Search Panel</div>
+						<div class="box-topic">Car Registration Panel</div>
 
 					</div>
 				</div>
 			</div>
 
-			<div class="button1">
-				<a href="addnewvehicle">Add Vehicle</a>
-			</div>
 
 			<div class="sales-boxes">
 				<div class="recent-sales box">
 
 
-					<form:form action="searchcar" method="POST"
-						modelAttribute="carDetails" id="vehicleForm">
+					<form:form action="addingnewcardetails" method="POST"
+						modelAttribute="VehicleDetails" id="userForm">
 
-						<!-- Model number -->
+						<!-- Model Name Field -->
 						<div class="form-group">
-							<label for="nameField">Search By Vehicle Model</label><input
-								type="text" class="form-control" id="inputName4"
-								name="vehiclemodel" placeholder="Enter Vehicle Model"
-								value="${carinfo.vehiclemodel}"
-								onkeyup="validateVehicleModel(); clearValidationMessageforCar('inputName4','error-message')" />
+							<label for="nameField">Vehicle Model</label> <input type="text"
+								id="inputVehicleModel" name="vehiclemodel"
+								placeholder="Enter Vehicle Model Name" value=""
+								required="required"
+								onkeyup="validateVehicleModel(); clearValidationMessage('inputVehicleModel','error-message')" />
 							<span id="error-message" style="color: red; display: none;">Invalid
 								vehicle model name. Ensure no leading spaces, special
 								characters, and no more than one space between words.</span>
 						</div>
 
-						<!-- Number plate Field -->
+						<!-- Registered Number Field -->
 						<div class="form-group">
-							<label for="contactField">Search By Vehicle Registered
-								Number</label> <input type="text" id="inputVehicleNPlate"
-								name="vehiclenplate"
-								placeholder="Enter Vehicle Registered number"
-								value="${carinfo.vehiclenplate}" maxlength="10"
-								onkeyup="validateVehicleNumber(); clearValidationMessage('inputVehicleNPlate','vehicleNPlateError')" />
-							<span id="vehicleNPlateError" style="color: red; display: none;">Invalid
+							<label for="inputVehicleNPlate6" class="form-label">Vehicle
+								Registered Number</label> <input type="text" class="form-control"
+								id="inputVehicleNPlate" name="vehiclenplate"
+								placeholder="Enter Registered Vehicle Number" value=""
+								required="required" maxlength="10"
+								onkeyup="validateVehicleNumber(); clearValidationMessage('inputVehicleNPlate','vehicleNPlateError')"
+								onchange="checkVehicleNumber()" /> <span
+								id="vehicleNPlateError" style="color: red; display: none;">Invalid
 								vehicle number plate</span>
 						</div>
 
-						<!-- Vehicle Entry Date -->
+						<!-- KM Running Field -->
 						<div class="form-group">
-							<label for="emailField">Search By Vehicle Entry Date</label> <input
-								type="date" id="inputVehicleDate8" name="visitVentryDate"
-								placeholder="Enter Vehicle Entry Date"
-								value="${carinfo.visitVentryDate}" />
-
+							<label for="emailField">Vehicle Runs in KM</label> <input
+								type="number" id="inputVehicleRun" name="visitVrun"
+								placeholder="Enter Vehicle Running in km" value=""
+								required="required" />
 						</div>
 
 
 
+						<!-- Entry Date Field -->
+						<div class="form-group">
+							<label for="addressField">Vehicle Entry Date</label> <input
+								type="date" id="inputVehicleEntryDate" name="visitVentryDate"
+								placeholder="Enter Vehicle Entry Date" value=""
+								required="required">
+						</div>
+
 						<!-- Technician Field -->
 						<div class="form-group">
-							<label for="addressField">Search By Select Technician</label> <select
-								class="form-control" id="selectTechnician" name="tname">
+							<label for="selectTechnician" class="form-label">Select
+								Technician</label> <select class="form-control" id="selectTechnician"
+								name="tid" required="required">
 								<option value="" disabled selected>Select a technician</option>
 								<c:forEach var="technician" items="${techies}">
-									<option value="${technician.tname}">${technician.tname}</option>
+									<option value="${technician.tid}">${technician.tname}</option>
 								</c:forEach>
 							</select>
 						</div>
 
 						<!-- Submit Button (Disabled by default) -->
 						<div class="button-container">
-							<button type="submit">Search</button>
+							<button type="submit">Submit</button>
 						</div>
+						<div style="text-align: center;">
+							<label style="color: blue;">${msg}</label>
+						</div>
+
 					</form:form>
 				</div>
 			</div>
@@ -384,32 +387,29 @@
 								<tr class=" table-success">
 									<th scope="col">Sr no.</th>
 									<th scope="col">Vehicle Model</th>
-									<th scope="col">Registered Number</th>
-									<th scope="col">Vehicle Running in KMs</th>
-									<th scope="col">Entry Date</th>
-									<th scope="col">Technician</th>
+									<th scope="col">Registered Vehicle Number</th>
+									<th scope="col">Vehicle Running KM</th>
+									<th scope="col">Vehicle Entry Date</th>
+									<th scope="col">Technician Name</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<%
-								int count = 0;
-								%>
-								<c:forEach var="vehicle" items="${vehicles}">
-									<tr>
-										<td><a href="updateforcar?VisitID=${vehicle.vehicleid}"
-											type="button" class="btn btn-info btn-sm"
-											style="color: white; text-decoration: none"><%=++count%></a></td>
 
+								<c:if test="${not empty vehicle}">
+									<tr>
+										<td><a href="updateforcar?vvID=${vehicle.vehicleid}"
+											type="button" class="btn btn-info btn-sm"
+											style="color: white; text-decoration: none">${vehicle.vehicleid}</a></td>
 										<td>${vehicle.vehiclemodel }</td>
 										<td>${vehicle.vehiclenplate }</td>
 										<td>${vehicle.visitVrun }</td>
 										<td>${vehicle.visitVentryDate }</td>
-										<td>${vehicle.tname}</td>
+										<td>${vehicle.tname }</td>
 										<td><button type="button" class="btn btn-danger btn-sm"
 												onclick="confirmDeleteforvehicle(${vehicle.vehicleid})">Delete</button></td>
 									</tr>
-								</c:forEach>
+								</c:if>
 							</tbody>
 						</table>
 					</div>
@@ -430,110 +430,41 @@
 				sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
 		};
 
-
-		
-		
 		
 		//for vehicle model 
 		 function validateVehicleModel() {
-  const inputField = document.getElementById('inputName4');
-  const errorMessage = document.getElementById('error-message');
-  
-  
-  
-  // Regular expression: no leading spaces, no special characters, only one space between words
-  const regex = /^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/;
+    const inputField = document.getElementById('inputVehicleModel');
+    const errorMessage = document.getElementById('error-message');
+    
+    
+    
+    // Regular expression: no leading spaces, no special characters, only one space between words
+    const regex = /^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/;
 
-  if (!regex.test(inputField.value)) {
-      errorMessage.style.display = 'block';
-      inputField.setCustomValidity('Invalid vehicle model name.');
-  } else {
-      errorMessage.style.display = 'none';
-      inputField.setCustomValidity('');
-  }
-	
+    if (!regex.test(inputField.value)) {
+        errorMessage.style.display = 'block';
+        inputField.setCustomValidity('Invalid vehicle model name.');
+    } else {
+        errorMessage.style.display = 'none';
+        inputField.setCustomValidity('');
+    }
+ 	
 }
+		 
 		
-		 function clearValidationMessageforCar(fieldId, messageId) {
+		 function clearValidationMessage(fieldId, messageId) {
 				const field = document.getElementById(fieldId);
 				const message = document.getElementById(messageId);
 
 				if (field.value.trim() === "") {
 					message.style.display = 'none';
 					field.setCustomValidity('');
-				}
+			    }
 			}
 		
 		
 		
-		
-		
-		// Validate the name field
-		function validateName() {
-			const nameField = document.getElementById("nameField");
-			const validationMessage = document
-					.getElementById("nameValidationMessage");
-			const nameRegex = /^[A-Za-z]+(?:[A-Za-z\s]*)$/; // Name can only start with letters
-
-			if (nameField.value.trim() === "") {
-				validationMessage.textContent = ""; // Hide message if input is empty
-			} else if (!nameRegex.test(nameField.value.trim())) {
-				validationMessage.textContent = "Name cannot start with spaces, numbers, or special characters.";
-				validationMessage.style.color = "red";
-			} else {
-				validationMessage.textContent = ""; // Clear the error if valid
-			}
-		}
-
-		// Validate the contact field
-		function validateContact() {
-			const contactField = document.getElementById("contactField");
-			const contactValidationMessage = document
-					.getElementById("contactValidationMessage");
-			const contactRegex = /^[0-9]{10}$/; // Phone number should be 10 digits and start with a number
-
-			if (contactField.value.trim() === "") {
-				contactValidationMessage.textContent = ""; // Hide message if input is empty
-			} else if (!contactRegex.test(contactField.value.trim())) {
-				contactValidationMessage.textContent = "Invalid phone number. Only 10 digits allowed.";
-				contactValidationMessage.style.color = "red";
-			} else {
-				contactValidationMessage.textContent = ""; // Clear the error if valid
-			}
-		}
-
-		// Validate the email field
-		function validateEmail() {
-			const emailField = document.getElementById("emailField");
-			const emailValidationMessage = document
-					.getElementById("emailValidationMessage1");
-			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
-
-			if (emailField.value.trim() === "") {
-				emailValidationMessage.textContent = ""; // Hide message if input is empty
-			} else if (!emailRegex.test(emailField.value.trim())) {
-				emailValidationMessage.textContent = "Invalid email format.";
-				emailValidationMessage.style.color = "red";
-			} else {
-				emailValidationMessage.textContent = ""; // Clear the error if valid
-			}
-		}
-
-		// Clear validation message on empty input
-		function clearValidationMessage(fieldId, messageId) {
-			const field = document.getElementById(fieldId);
-			const message = document.getElementById(messageId);
-
-			if (field.value.trim() === "") {
-				message.textContent = ""; // Hide message if input is empty
-			}
-		}
-		
-		
-		
-		
-		//delete by using ajax vehicle
-		
+		//for delete the vehicle
 		function confirmDeleteforvehicle(vehicleId) {
 			// Show confirmation dialog
 
@@ -563,27 +494,67 @@
 				xhr.send();
 			}
 		}
-		
-	   
-	  //that is for number plate
+	    
 		function validateVehicleNumber() {
-			const input = document.getElementById('inputVehicleNPlate').value;
-			const errorMsg = document.getElementById('vehicleNPlateError');
-			const initialCheck = /^[A-Za-z][A-Za-z0-9 ]*$/; // First check for valid starting character
-			const vehicleNumberPattern = /^[A-Z]{2}\d{2}[A-Z]{2}\d{1,4}$/; // Format for registered vehicle plate
+		    const input = document.getElementById('inputVehicleNPlate').value;
+		    const errorMsg = document.getElementById('vehicleNPlateError');
+		    
+		    // Clear error message if input is empty
+		    if (input.trim() === "") {
+		        errorMsg.style.display = 'none'; // Hide the error message
+		        return; // Stop further validation
+		    }
 
-			if (!initialCheck.test(input)) {
-				errorMsg.innerHTML = "Number plate cannot start with spaces, digits, or special characters.";
-				errorMsg.style.display = 'inline';
-			} else if (!vehicleNumberPattern.test(input)) {
-				errorMsg.innerHTML = "Invalid vehicle number plate format. Expected format: MH12AB1234.";
-				errorMsg.style.display = 'inline';
-			} else {
-				errorMsg.style.display = 'none';
-			}
+		    const initialCheck = /^[A-Za-z][A-Za-z0-9 ]*$/; // First check for valid starting character
+		    const vehicleNumberPattern = /^[A-Z]{2}\d{2}[A-Z]{2}\d{1,4}$/; // Format for registered vehicle plate
+
+		    if (!initialCheck.test(input)) {
+		        errorMsg.innerHTML = "Number plate cannot start with spaces, digits, or special characters.";
+		        errorMsg.style.display = 'inline';
+		    } else if (!vehicleNumberPattern.test(input)) {
+		        errorMsg.innerHTML = "Invalid vehicle number plate format. Expected format: MH12AB1234.";
+		        errorMsg.style.display = 'inline';
+		    } else {
+		        errorMsg.style.display = 'none';
+		    }
 		}
+		
+		function checkVehicleNumber() {
+			const vehicleNumber = document.getElementById('inputVehicleNPlate').value;
+	        console.log(vehicleNumber)
+	        if (vehicleNumber.length > 0) {
+	            // Send Ajax request
+	            var xhr = new XMLHttpRequest();
+	            xhr.open("GET", "/CarGarageApplicationMVC/checkVehicleNumber?vehicleNumber=" + vehicleNumber, true);
+	            
+	            xhr.onreadystatechange = function () {
+	                if (xhr.readyState == 4 && xhr.status == 200) {
+	                    const response = xhr.responseText;
+
+	                    // Show error if vehicle number exists
+	                    if (response === 'exists') {
+	                        const errorMsg = document.getElementById('vehicleNPlateError');
+	                        errorMsg.innerHTML = "Vehicle number already exists.";
+	                        errorMsg.style.display = 'inline';
+	                    }
+	                }
+	            };
+	            xhr.send();
+	        }
+	    }
+
+	  
+		 // Check if the message exists
+	    var messageLabel = document.getElementById("messageLabel");
+	    if (messageLabel && messageLabel.innerHTML.trim() !== "") {
+	        // Set a timeout to hide the message after 5 seconds (5000 ms)
+	        setTimeout(function() {
+	            messageLabel.style.display = "none";
+	        }, 2000); // 5000 milliseconds = 5 seconds
+	    }
 	    
 	</script>
 
 </body>
 </html>
+

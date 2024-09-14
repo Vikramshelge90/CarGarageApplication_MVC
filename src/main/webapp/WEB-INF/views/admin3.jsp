@@ -240,12 +240,17 @@
 						Section</span>
 			</a></li>
 
-			<li><a href="carpage"> <i class='bx bxs-car-mechanic'></i>
-					<span class="links_name">Cars Section</span>
+			<li><a href="carpage"> <i class='bx bxs-car-mechanic'></i> <span
+					class="links_name">Cars Section</span>
 			</a></li>
 
+			<li><a href="servicedetailspage"> <i class='bx bxs-cart-add'></i><span
+					class="links_name">Services</span>
+			</a></li>
 
-
+			<li><a href="#"> <i class='bx bxs-spreadsheet'></i> <span
+					class="links_name">Reports</span>
+			</a></li>
 
 			<li><a href="#"> <i class="bx bx-list-ul"></i> <span
 					class="links_name">Order list</span>
@@ -310,16 +315,18 @@
 						<div class="form-group">
 							<label for="nameField">Full Name</label> <input type="text"
 								id="nameField" name="username" placeholder="Enter full name"
-								value=""
-								onkeyup="validateName(); clearValidationMessage('nameField', 'nameValidationMessage')" />
-							<span id="nameValidationMessage"></span>
+								value="" required="required"
+								onkeyup="validateName(); clearValidationMessageforCar('nameField', 'error-message-name')" />
+							<span id="error-message-name" style="color: red; display: none;">Invalid
+								User Name. Ensure no leading spaces, special characters, and no
+								more than one space between words.</span>
 						</div>
 
 						<!-- Contact Field -->
 						<div class="form-group">
 							<label for="contactField">Phone Number</label> <input type="text"
 								id="contactField" name="usercontact"
-								placeholder="Enter phone number" value=""
+								placeholder="Enter phone number" value="" required="required" maxlength="10"
 								onkeyup="validateContact(); clearValidationMessage('contactField', 'contactValidationMessage')" />
 							<span id="contactValidationMessage"></span>
 						</div>
@@ -328,7 +335,7 @@
 						<div class="form-group">
 							<label for="emailField">Email Address</label> <input type="email"
 								id="emailField" name="useremail" placeholder="Enter email"
-								value=""
+								value="" required="required"
 								onkeyup="validateEmail(); clearValidationMessage('emailField', 'emailValidationMessage')" />
 							<span id="emailValidationMessage1"></span>
 						</div>
@@ -339,7 +346,12 @@
 						<div class="form-group">
 							<label for="addressField">Home Address</label> <input type="text"
 								id="addressField" name="useraddress"
-								placeholder="Enter home address" value="">
+								placeholder="Enter home address" value="" required="required"
+								onkeyup="validatAddress(); clearValidationMessageforCar('addressField', 'error-message-address')" />
+							<span id="error-message-address"
+								style="color: red; display: none;">Invalid Address.
+								Ensure no leading spaces, special characters, and no more than
+								one space between words.</span>
 						</div>
 
 						<!-- Submit Button (Disabled by default) -->
@@ -405,7 +417,7 @@
 
 
 		// Validate the name field
-		function validateName() {
+		/* function validateName() {
 			const nameField = document.getElementById("nameField");
 			const validationMessage = document
 					.getElementById("nameValidationMessage");
@@ -419,7 +431,28 @@
 			} else {
 				validationMessage.textContent = ""; // Clear the error if valid
 			}
+		} */
+		
+		
+		function validateName() {
+			const nameField = document.getElementById("nameField");
+			const validationMessage = document
+					.getElementById("error-message-name");
+			
+			// Regular expression: no leading spaces, no special characters, only one space between words
+		    const regex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+
+		    if (!regex.test(nameField.value)) {
+		    	validationMessage.style.display = 'block';
+		        nameField.setCustomValidity('Invalid User name.');
+		    } else {
+		    	validationMessage.style.display = 'none';
+		        nameField.setCustomValidity('');
+		    }
 		}
+		
+		
+		
 
 		// Validate the contact field
 		function validateContact() {
@@ -466,6 +499,37 @@
 		}
 		
 		
+		
+		 function validatAddress() {
+			    const inputField = document.getElementById('addressField');
+			    const errorMessage = document.getElementById('error-message-address');
+			    
+			    
+			    
+			    // Regular expression: no leading spaces, no special characters, only one space between words
+			    const regex = /^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/;
+
+			    if (!regex.test(inputField.value)) {
+			        errorMessage.style.display = 'block';
+			        inputField.setCustomValidity('Invalid Address input.');
+			    } else {
+			        errorMessage.style.display = 'none';
+			        inputField.setCustomValidity('');
+			    }
+			 	
+			}
+		 
+		 
+		 function clearValidationMessageforCar(fieldId, messageId) {
+				const field = document.getElementById(fieldId);
+				const message = document.getElementById(messageId);
+
+				if (field.value.trim() === "") {
+					message.style.display = 'none';
+					field.setCustomValidity('');
+				}
+			}
+		
 	
 	    function confirmDelete(userId) {
 	        // Show confirmation dialog
@@ -497,8 +561,16 @@
 	        } 
 	    }
 	    
+	    // Check if the message exists
+	    var messageLabel = document.getElementById("messageLabel");
+	    if (messageLabel && messageLabel.innerHTML.trim() !== "") {
+	        // Set a timeout to hide the message after 5 seconds (5000 ms)
+	        setTimeout(function() {
+	            messageLabel.style.display = "none";
+	        }, 2000); // 5000 milliseconds = 5 seconds
+	    }
 	</script>
 
 </body>
 </html>
-html>
+

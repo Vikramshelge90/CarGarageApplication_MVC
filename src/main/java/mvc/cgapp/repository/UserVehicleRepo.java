@@ -37,4 +37,6 @@ public interface UserVehicleRepo {
 	boolean getLinkedUIDinVehicle(int vid,int uid);
 	
 //	void deleteUsersByID(int userid);
+	
+	boolean checkIfVehicleExists(String vehicleNumber);
 }

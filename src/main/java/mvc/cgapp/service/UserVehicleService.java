@@ -22,4 +22,6 @@ public interface UserVehicleService {
 	
 	List<VehicleFormModel> getSelectedCarsByVNPlate(String vnplate);
 	
+	
+	boolean checkIfVehicleExists(String vehicleNumber);
 }

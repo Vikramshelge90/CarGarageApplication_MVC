@@ -240,19 +240,22 @@
 						Section</span>
 			</a></li>
 
-			<li><a href="carpage"> <i class='bx bxs-car-mechanic'></i>
-					<span class="links_name">Cars Section</span>
+			<li><a href="carpage"> <i class='bx bxs-car-mechanic'></i> <span
+					class="links_name">Cars Section</span>
 			</a></li>
-
-
-
 
 			<li><a href="servicedetailspage"> <i class='bx bxs-cart-add'></i><span
 					class="links_name">Services</span>
 			</a></li>
+
+			<li><a href="#"> <i class='bx bxs-spreadsheet'></i> <span
+					class="links_name">Reports</span>
+			</a></li>
+
 			<li><a href="#"> <i class="bx bx-pie-chart-alt-2"></i> <span
 					class="links_name">Analytics</span>
 			</a></li>
+
 			<li><a href="#"> <i class="bx bx-coin-stack"></i> <span
 					class="links_name">Stock</span>
 			</a></li>
@@ -266,11 +269,9 @@
 			<li><a href="#"> <i class="bx bx-heart"></i> <span
 					class="links_name">Favrorites</span>
 			</a></li>
-			<li><a href="#"> <i class='bx bxs-spreadsheet'></i> <span
-					class="links_name">Reports</span>
-			</a></li>
-			<li class="log_out"><a href="logoutbtn"> <i class="bx bx-log-out"></i>
-					<span class="links_name">Log out</span>
+
+			<li class="log_out"><a href="logoutbtn"> <i
+					class="bx bx-log-out"></i> <span class="links_name">Log out</span>
 			</a></li>
 		</ul>
 	</div>
@@ -311,27 +312,30 @@
 
 						<!-- Name Field -->
 						<div class="form-group">
-							<label for="nameField">Full Name</label> <input type="text"
-								id="nameField" name="username" placeholder="Enter full name"
-								value="${userinfo.username}"
-								onkeyup="validateName(); clearValidationMessage('nameField', 'nameValidationMessage')" />
-							<span id="nameValidationMessage"></span>
+							<label for="nameField">Search by Full Name</label> <input
+								type="text" id="nameField" name="username"
+								placeholder="Enter full name" value="${userinfo.username}"
+								onkeyup="validateName(); clearValidationMessageforCar('nameField', 'error-message-name')" />
+							<span id="error-message-name"
+									style="color: red; display: none;">Invalid User Name. Ensure no leading spaces, special characters, and no more
+									than one space between words.</span>
 						</div>
 
 						<!-- Contact Field -->
 						<div class="form-group">
-							<label for="contactField">Phone Number</label> <input type="text"
-								id="contactField" name="usercontact"
+							<label for="contactField">Search by Phone Number</label> <input
+								type="text" id="contactField" name="usercontact"
 								placeholder="Enter phone number" value="${userinfo.usercontact}"
+								maxlength="10"
 								onkeyup="validateContact(); clearValidationMessage('contactField', 'contactValidationMessage')" />
 							<span id="contactValidationMessage"></span>
 						</div>
 
 						<!-- Email Field -->
 						<div class="form-group">
-							<label for="emailField">Email Address</label> <input type="email"
-								id="emailField" name="useremail" placeholder="Enter email"
-								value="${userinfo.useremail}"
+							<label for="emailField">Search by Email Address</label> <input
+								type="email" id="emailField" name="useremail"
+								placeholder="Enter email" value="${userinfo.useremail}"
 								onkeyup="validateEmail(); clearValidationMessage('emailField', 'emailValidationMessage')" />
 							<span id="emailValidationMessage1"></span>
 						</div>
@@ -340,9 +344,14 @@
 
 						<!-- Address Field -->
 						<div class="form-group">
-							<label for="addressField">Home Address</label> <input type="text"
-								id="addressField" name="useraddress"
-								placeholder="Enter home address" value="${userinfo.useraddress}">
+							<label for="addressField">Search by Home Address</label> <input
+								type="text" id="addressField" name="useraddress"
+								placeholder="Enter home address" value="${userinfo.useraddress}" onkeyup="validatAddress(); clearValidationMessage('addressField', 'addressValidationMessage1')"  />
+								 <!-- <span
+								id="error-message" style="color: red; display: none;">Invalid
+								vehicle model name. Ensure no leading spaces, special
+								characters, and no more than one space between words.</span> -->
+							<span id="addressValidationMessage1"></span>
 						</div>
 
 						<!-- Submit Button (Disabled by default) -->
@@ -374,7 +383,8 @@
 								<c:forEach var="user" items="${users}">
 									<tr>
 										<td><a href="updateSave?userID=${user.userid}"
-											type="button" class="btn btn-info btn-sm" style="color: white; text-decoration: none"><%=++count%></a></td>
+											type="button" class="btn btn-info btn-sm"
+											style="color: white; text-decoration: none"><%=++count%></a></td>
 										<td>${user.username}</td>
 										<td>${user.usercontact}</td>
 										<td>${user.useremail}</td>
@@ -405,7 +415,7 @@
 
 
 		// Validate the name field
-		function validateName() {
+		/* function validateName() {
 			const nameField = document.getElementById("nameField");
 			const validationMessage = document
 					.getElementById("nameValidationMessage");
@@ -419,8 +429,28 @@
 			} else {
 				validationMessage.textContent = ""; // Clear the error if valid
 			}
+		} */
+		
+		
+		function validateName() {
+			const nameField = document.getElementById("nameField");
+			const validationMessage = document
+					.getElementById("error-message-name");
+			
+			// Regular expression: no leading spaces, no special characters, only one space between words
+		    const regex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+
+		    if (!regex.test(nameField.value)) {
+		    	validationMessage.style.display = 'block';
+		        nameField.setCustomValidity('Invalid User name.');
+		    } else {
+		    	validationMessage.style.display = 'none';
+		        nameField.setCustomValidity('');
+		    }
 		}
 
+		
+		
 		// Validate the contact field
 		function validateContact() {
 			const contactField = document.getElementById("contactField");
@@ -454,6 +484,26 @@
 				emailValidationMessage.textContent = ""; // Clear the error if valid
 			}
 		}
+		
+		
+		function validatAddress() {
+		    const inputField = document.getElementById('addressField');
+		    const errorMessage = document.getElementById('addressValidationMessage1');
+		    
+		    
+		    
+		    // Regular expression: no leading spaces, no special characters, only one space between words
+		    const regex = /^[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$/;
+
+		    if (!regex.test(inputField.value)) {
+		    	errorMessage.textContent = "Invalid Address format.";
+		    	errorMessage.style.color = "red";
+				
+		    } else {
+		    	errorMessage.textContent = "";
+		    }
+		 	
+		}
 
 		// Clear validation message on empty input
 		function clearValidationMessage(fieldId, messageId) {
@@ -462,6 +512,17 @@
 
 			if (field.value.trim() === "") {
 				message.textContent = ""; // Hide message if input is empty
+			}
+		}
+		
+		
+		function clearValidationMessageforCar(fieldId, messageId) {
+			const field = document.getElementById(fieldId);
+			const message = document.getElementById(messageId);
+
+			if (field.value.trim() === "") {
+				message.style.display = 'none';
+				field.setCustomValidity('');
 			}
 		}
 		

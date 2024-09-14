@@ -110,4 +110,10 @@ public class UserVehicleServiceImpl implements UserVehicleService {
 		return userVehicleRepo.getSelectedCarsByNumberPlate(vnplate);
 	}
 
+	@Override
+	public boolean checkIfVehicleExists(String vehicleNumber) {
+		
+		return userVehicleRepo.checkIfVehicleExists(vehicleNumber);
+	}
+
 }

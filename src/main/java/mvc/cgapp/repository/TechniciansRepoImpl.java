@@ -12,21 +12,21 @@ import org.springframework.stereotype.Repository;
 import mvc.cgapp.model.TechniciansModel;
 
 @Repository
-public class TechniciansRepoImpl implements TechniciansRepo{
+public class TechniciansRepoImpl implements TechniciansRepo {
 
 	@Autowired
-	JdbcTemplate jdbcTemplate; 
-	
+	JdbcTemplate jdbcTemplate;
+
 	@Override
 	public List<TechniciansModel> getAllTechnicians() {
-		
-		String sql="select *from TechnicianDetails_1";
-		
-		List<TechniciansModel> getAllTechie=jdbcTemplate.query(sql, new RowMapper<TechniciansModel>() {
+
+		String sql = "select *from TechnicianDetails_1";
+
+		List<TechniciansModel> getAllTechie = jdbcTemplate.query(sql, new RowMapper<TechniciansModel>() {
 
 			@Override
 			public TechniciansModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-				TechniciansModel getit=new TechniciansModel();
+				TechniciansModel getit = new TechniciansModel();
 				getit.setTid(rs.getInt(1));
 				getit.setTname(rs.getString(2));
 				return getit;
@@ -37,18 +37,25 @@ public class TechniciansRepoImpl implements TechniciansRepo{
 
 	@Override
 	public List<TechniciansModel> getTechniciansByName(String tname) {
-		String sql="select *from TechnicianDetails_1 where tname like ?";
-		String pattern="%"+tname+"%";
-		List<TechniciansModel> getSelectedTechie=jdbcTemplate.query(sql, new RowMapper<TechniciansModel>() {
+		String sql = "select *from TechnicianDetails_1 where tname like ?";
+		String pattern = tname + "%";
+		List<TechniciansModel> getSelectedTechie = null;
+		try {
 
-			@Override
-			public TechniciansModel mapRow(ResultSet rs, int rowNum) throws SQLException {
-				TechniciansModel getit=new TechniciansModel();
-				getit.setTid(rs.getInt(1));
-				getit.setTname(rs.getString(2));
-				return getit;
-			}
-		},pattern);
+			getSelectedTechie = jdbcTemplate.query(sql, new RowMapper<TechniciansModel>() {
+
+				@Override
+				public TechniciansModel mapRow(ResultSet rs, int rowNum) throws SQLException {
+					TechniciansModel getit = new TechniciansModel();
+					getit.setTid(rs.getInt(1));
+					getit.setTname(rs.getString(2));
+					return getit;
+				}
+			}, pattern);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		return getSelectedTechie;
 	}
 }

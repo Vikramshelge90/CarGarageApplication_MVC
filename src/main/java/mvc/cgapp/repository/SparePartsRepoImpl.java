@@ -23,21 +23,26 @@ public class SparePartsRepoImpl implements SparePartsRepo {
 	public List<SubSparePartsModel> getSubSparePartsByMSPID(int mspid) {
 
 		String sql = "select spid,spname,spprice,mspid from sparepartsdetails_1 where mspid=?";
+		List<SubSparePartsModel> gettingSelectedSubSpareParts = null;
+		try {
 
-		List<SubSparePartsModel> gettingSelectedSubSpareParts = jdbcTemplate.query(sql,
-				new RowMapper<SubSparePartsModel>() {
+			gettingSelectedSubSpareParts = jdbcTemplate.query(sql, new RowMapper<SubSparePartsModel>() {
 
-					@Override
-					public SubSparePartsModel mapRow(ResultSet rs, int arg1) throws SQLException {
-						SubSparePartsModel getit = new SubSparePartsModel();
-						getit.setSpid(rs.getInt(1));
-						getit.setSpname(rs.getString(2));
-						getit.setSpprice(rs.getFloat(3));
-						getit.setMspid(rs.getInt(4));
-						return getit;
-					}
+				@Override
+				public SubSparePartsModel mapRow(ResultSet rs, int arg1) throws SQLException {
+					SubSparePartsModel getit = new SubSparePartsModel();
+					getit.setSpid(rs.getInt(1));
+					getit.setSpname(rs.getString(2));
+					getit.setSpprice(rs.getFloat(3));
+					getit.setMspid(rs.getInt(4));
+					return getit;
+				}
 
-				}, mspid);
+			}, mspid);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		return gettingSelectedSubSpareParts;
 
 	}
@@ -67,17 +72,20 @@ public class SparePartsRepoImpl implements SparePartsRepo {
 
 	@Override
 	public boolean linkSPID_QTY_VVID(int vvid, Map<Integer, Integer> SpidQty) {
-		int res=0;
-		String sql="insert into sparepartsjoin_1(spid,spqty,vvid) values(?,?,?)";
-		for(Map.Entry<Integer,Integer> idmap:SpidQty.entrySet()) {
-			int spid=idmap.getKey();
-			int qty=idmap.getValue();
-			res=jdbcTemplate.update(sql,spid,qty,vvid);
+		int res = 0;
+		String sql = "insert into sparepartsjoin_1(spid,spqty,vvid) values(?,?,?)";
+		try {
+
+			for (Map.Entry<Integer, Integer> idmap : SpidQty.entrySet()) {
+				int spid = idmap.getKey();
+				int qty = idmap.getValue();
+				res = jdbcTemplate.update(sql, spid, qty, vvid);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
-		return res>0?true:false;
+		return res > 0 ? true : false;
 	}
-	
-	
-	
 
 }
