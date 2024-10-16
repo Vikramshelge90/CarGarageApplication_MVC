@@ -26,5 +26,19 @@ public class TechniciansServiceImpl implements TechniciansService{
 		return techniciansRepo.getTechniciansByName(tname);
 	}
 
+	@Override
+	public int addNewTechie(TechniciansModel techniciansModel) {
+		// TODO Auto-generated method stub
+		return techniciansRepo.addNewTechie(techniciansModel);
+	}
+
+	@Override
+	public TechniciansModel getSelectedTechieByTid(int tid) {
+		
+		return techniciansRepo.getSelectedTechieByTid(tid);
+	}
+
+
+
 
 }

@@ -18,7 +18,7 @@
 <title>Billing Section</title>
 
 <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-<link type="text/css" rel="stylesheet" href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/styleadmin.css" />
+<link type="text/css" rel="stylesheet" href="resources/css/styleadmin.css" />
 
 <style type="text/css">
 /* General styles */

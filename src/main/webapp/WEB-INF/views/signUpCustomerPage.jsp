@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Sign Up for GoGarage AutoMobs</title>
 <link rel="icon" type="image/x-icon"
-    href="/Movie_Recommendation/URLToReachResourceFolder/images/website-feviicon.png" />
+    href="resources/images/website-feviicon.png" />
 
 <style type="text/css">
 /* Your existing CSS remains the same */

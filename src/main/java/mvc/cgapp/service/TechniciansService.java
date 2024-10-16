@@ -8,5 +8,7 @@ public interface TechniciansService {
 
 	List<TechniciansModel> getAllTechnicians();
 	List<TechniciansModel> getSelectedTechies(String tname);
+	int addNewTechie(TechniciansModel techniciansModel);
+	TechniciansModel getSelectedTechieByTid(int tid);
 	
 }

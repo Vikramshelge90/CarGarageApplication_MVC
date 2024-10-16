@@ -9,7 +9,7 @@
 <title>Log in into GoGarage AutoMobs</title>
 <!-- fot website fevicon image -->
 <link rel="icon" type="image/x-icon"
-	href="/Movie_Recommendation/URLToReachResourceFolder/images/website-feviicon.png" />
+	href="/Movie_Recommendation/resources/images/website-feviicon.png" />
 
 <style type="text/css">
 /* Styles unchanged, keeping the CSS as is */

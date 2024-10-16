@@ -12,7 +12,7 @@
 <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
 	rel="stylesheet" />
 <link type="text/css" rel="stylesheet"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/styleadmin.css" />
+	href="resources/css/styleadmin.css" />
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -242,7 +242,7 @@
 		</div>
 		<ul class="nav-links">
 
-			<li><a href="#"> <i class="bx bx-grid-alt"></i> <span
+			<li><a href="dashboard"> <i class="bx bx-grid-alt"></i> <span
 					class="links_name">Dashboard</span>
 			</a></li>
 

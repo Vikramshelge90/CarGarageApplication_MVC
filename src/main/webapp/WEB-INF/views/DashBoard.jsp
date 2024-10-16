@@ -41,7 +41,8 @@
 }
 
 .form-group input[type="text"], .form-group input[type="email"],
-	.form-group input[type="number"], .form-group textarea {
+	.form-group input[type="number"], .form-group textarea, .form-group select
+	{
 	width: 100%;
 	padding: 10px 15px;
 	border: 1px solid #ccc;
@@ -222,6 +223,75 @@
 		padding: 4px 8px;
 	}
 }
+
+/* The Modal (background) */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: white;
+	margin: 10% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 50%;
+	/* Width of modal */
+	border-radius: 10px;
+}
+
+/* Close Button */
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+/* Styling form fields */
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.form-group input {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+/* Submit Button */
+button[type="submit"] {
+	padding: 10px 20px;
+	background-color: #0A2558;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover {
+	background-color: #0f3886;
+}
 </style>
 </head>
 <body>
@@ -231,18 +301,16 @@
 				AutoMobs</span>
 		</div>
 		<ul class="nav-links">
-			<li><a href="dashboard"> <i class="bx bx-grid-alt"></i> <span
-					class="links_name">Dashboard</span>
+			<li><a href="dashboard" class="active"> <i class="bx bx-grid-alt"></i> <span
+					class="links_name" >Dashboard</span>
 			</a></li>
 
-			<li><a href="adminside" > <i
-					class='bx bxs-group'></i> <span class="links_name">Customers
-						Section</span>
+			<li><a href="adminside"> <i class='bx bxs-group'></i> <span
+					class="links_name">Customers Section</span>
 			</a></li>
 
-			<li><a href="carpage"> <i
-					class='bx bxs-car-mechanic'></i> <span class="links_name">Cars
-						Section</span>
+			<li><a href="carpage"> <i class='bx bxs-car-mechanic'></i> <span
+					class="links_name">Cars Section</span>
 			</a></li>
 
 
@@ -254,19 +322,21 @@
 			<li><a href="sparePartspage"> <i class="bx bx-wrench"></i> <span
 					class="links_name">Spare Parts</span>
 			</a></li>
-			<li><a href="techiepage" class="active"> <i class="bx bxs-group"></i> <span
+			<li><a href="techiepage"> <i class="bx bxs-group"></i> <span
 					class="links_name">Technician</span>
 			</a></li>
-			
+
 			<li><a href="billingPage"> <i class="bx bxs-receipt"></i> <span
 					class="links_name">Billing</span>
 			</a></li>
 			<li><a href="#"> <i class='bx bxs-report'></i> <span
 					class="links_name">Reports</span>
 			</a></li>
-			<li class="log_out"><a href="logoutbtn"> <i class="bx bx-log-out"></i>
-					<span class="links_name">Log out</span>
+			<li class="log_out"><a href="logoutbtn"> <i
+					class="bx bx-log-out"></i> <span class="links_name">Log out</span>
 			</a></li>
+
+
 		</ul>
 	</div>
 	<section class="home-section">
@@ -274,143 +344,119 @@
 			<div class="sidebar-button">
 				<i class="bx bx-menu sidebarBtn"></i> <span class="dashboard">Dashboard</span>
 			</div>
-			<!-- <div class="search-box">
-          <input type="text" placeholder="Search..." />
-          <i class="bx bx-search"></i>
-        </div> -->
-			<div class="profile-details">
-				<img src="" alt="" /> <span class="admin_name">${adminName}</span>
-				<!-- <i class="bx bx-chevron-down"></i> -->
+			<div class="search-box">
+				<input type="text" placeholder="Search..." /> <i
+					class="bx bx-search"></i>
 			</div>
+
 		</nav>
+
 		<div class="home-content">
 			<div class="overview-boxes">
 				<div class="box">
 					<div class="right-side">
-						<div class="box-topic">Technician Add Panel</div>
-
+						<div class="box-topic">Total Order</div>
+						<div class="number">40,876</div>
+						<div class="indicator">
+							<i class="bx bx-up-arrow-alt"></i> <span class="text">Up
+								from yesterday</span>
+						</div>
 					</div>
+					<i class="bx bx-cart-alt cart"></i>
+				</div>
+				<div class="box">
+					<div class="right-side">
+						<div class="box-topic">Total Sales</div>
+						<div class="number">38,876</div>
+						<div class="indicator">
+							<i class="bx bx-up-arrow-alt"></i> <span class="text">Up
+								from yesterday</span>
+						</div>
+					</div>
+					<i class="bx bxs-cart-add cart two"></i>
+				</div>
+				<div class="box">
+					<div class="right-side">
+						<div class="box-topic">Total Profit</div>
+						<div class="number">$12,876</div>
+						<div class="indicator">
+							<i class="bx bx-up-arrow-alt"></i> <span class="text">Up
+								from yesterday</span>
+						</div>
+					</div>
+					<i class="bx bx-cart cart three"></i>
+				</div>
+				<div class="box">
+					<div class="right-side">
+						<div class="box-topic">Total Return</div>
+						<div class="number">11,086</div>
+						<div class="indicator">
+							<i class="bx bx-down-arrow-alt down"></i> <span class="text">Down
+								From Today</span>
+						</div>
+					</div>
+					<i class="bx bxs-cart-download cart four"></i>
 				</div>
 			</div>
-
 
 			<div class="sales-boxes">
 				<div class="recent-sales box">
-
-
-					<form:form action="addingnewtechiedetails" method="POST"
-						modelAttribute="techieDetails" id="userForm">
-
-						<!-- Name Field -->
-						<div class="form-group">
-							<label for="nameField">Technician Name</label> <input type="text"
-								id="techieField" name="tname" placeholder="Enter Technician name"
-								value="${techieInfo.tname }" required="required"
-								onkeyup="validateTechieName(); clearValidationMessageforCar('techieField', 'error-message-name')" />
-							<span id="error-message-name" style="color: red; display: none;">Invalid
-								Technician Name. Ensure no leading spaces, special characters, and no
-								more than one space between words.</span>
-						</div>
-
-						
-
-						<!-- Submit Button (Disabled by default) -->
-						<div class="button-container">
-							<button type="submit">Submit</button>
-						</div>
-						<div style="text-align: center;">
-							<label style="color: blue;">${msg}</label>
-						</div>
-
-					</form:form>
-				</div>
-			</div>
-			<div class="sales-boxes" style="margin-top: 20px;">
-				<div class="recent-sales box">
-					<!-- Table responsive wrapper -->
-					<div class="table-responsive">
-						<table class="table">
-							<thead>
-								<tr class=" table-success">
-									<th scope="col">Sr no.</th>
-									<th scope="col">Name</th>
-									
-								</tr>
-							</thead>
-							<tbody>
-
-								<c:if test="${not empty techie}">
-									<tr>
-										<td><a href="updateSaveforTechie?userID=${techie.tid}"
-											type="button" class="btn btn-info btn-sm"
-											style="color: white; text-decoration: none">${techie.tid}</a></td>
-										<td>${techie.tname}</td>
-										
-									</tr>
-								</c:if>
-							</tbody>
-						</table>
+					<div class="title">Recent Sales</div>
+					<div class="sales-details">
+						<ul class="details">
+							<li class="topic">Date</li>
+							<li><a href="#">02 Jan 2021</a></li>
+							<li><a href="#">02 Jan 2021</a></li>
+							<li><a href="#">02 Jan 2021</a></li>
+							<li><a href="#">02 Jan 2021</a></li>
+							<li><a href="#">02 Jan 2021</a></li>
+							<li><a href="#">02 Jan 2021</a></li>
+							<li><a href="#">02 Jan 2021</a></li>
+						</ul>
+						<ul class="details">
+							<li class="topic">Customer</li>
+							<li><a href="#">Alex Doe</a></li>
+							<li><a href="#">David Mart</a></li>
+							<li><a href="#">Roe Parter</a></li>
+							<li><a href="#">Diana Penty</a></li>
+							<li><a href="#">Martin Paw</a></li>
+							<li><a href="#">Doe Alex</a></li>
+							<li><a href="#">Aiana Lexa</a></li>
+							<li><a href="#">Rexel Mags</a></li>
+							<li><a href="#">Tiana Loths</a></li>
+						</ul>
+						<ul class="details">
+							<li class="topic">Sales</li>
+							<li><a href="#">Delivered</a></li>
+							<li><a href="#">Pending</a></li>
+							<li><a href="#">Returned</a></li>
+							<li><a href="#">Delivered</a></li>
+							<li><a href="#">Pending</a></li>
+							<li><a href="#">Returned</a></li>
+							<li><a href="#">Delivered</a></li>
+							<li><a href="#">Pending</a></li>
+							<li><a href="#">Delivered</a></li>
+						</ul>
+						<ul class="details">
+							<li class="topic">Total</li>
+							<li><a href="#">$204.98</a></li>
+							<li><a href="#">$24.55</a></li>
+							<li><a href="#">$25.88</a></li>
+							<li><a href="#">$170.66</a></li>
+							<li><a href="#">$56.56</a></li>
+							<li><a href="#">$44.95</a></li>
+							<li><a href="#">$67.33</a></li>
+							<li><a href="#">$23.53</a></li>
+							<li><a href="#">$46.52</a></li>
+						</ul>
+					</div>
+					<div class="button">
+						<a href="#">See All</a>
 					</div>
 				</div>
+
 			</div>
-
-		</div>
+			</div>
 	</section>
-
-	<script type="text/javascript">
-		let sidebar = document.querySelector(".sidebar");
-		let sidebarBtn = document.querySelector(".sidebarBtn");
-		sidebarBtn.onclick = function() {
-			sidebar.classList.toggle("active");
-			if (sidebar.classList.contains("active")) {
-				sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-			} else
-				sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-		};
-
-
-		
-		function validateTechieName() {
-			const nameField = document.getElementById("techieField");
-			const validationMessage = document
-					.getElementById("error-message-name");
-			
-			// Regular expression: no leading spaces, no special characters, only one space between words
-		    const regex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
-
-		    if (!regex.test(nameField.value)) {
-		    	validationMessage.style.display = 'block';
-		        nameField.setCustomValidity('Invalid Techie name.');
-		    } else {
-		    	validationMessage.style.display = 'none';
-		        nameField.setCustomValidity('');
-		    }
-		}
-		
-		 
-		 
-		 function clearValidationMessageforCar(fieldId, messageId) {
-				const field = document.getElementById(fieldId);
-				const message = document.getElementById(messageId);
-
-				if (field.value.trim() === "") {
-					message.style.display = 'none';
-					field.setCustomValidity('');
-				}
-			}
-		
-	
-	    
-	    
-	    // Check if the message exists
-	    var messageLabel = document.getElementById("messageLabel");
-	    if (messageLabel && messageLabel.innerHTML.trim() !== "") {
-	        // Set a timeout to hide the message after 5 seconds (5000 ms)
-	        setTimeout(function() {
-	            messageLabel.style.display = "none";
-	        }, 2000); // 5000 milliseconds = 5 seconds
-	    }
-	</script>
-
 </body>
 </html>

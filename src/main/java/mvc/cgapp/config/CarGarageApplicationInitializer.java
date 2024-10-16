@@ -1,25 +1,26 @@
 package mvc.cgapp.config;
-
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class CarGarageApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+
+public class CarGarageApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		Class<?> config[]= {CarGarageConfigClass.class};
-		return config;
+
+		return new Class[] { CarGarageConfigClass.class };
 	}
 
 	@Override
 	protected String[] getServletMappings() {
-		String mapping[]= {"/"};
-		return mapping;
+		return new String[] { "/" };
 	}
 
 }

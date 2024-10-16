@@ -11,7 +11,7 @@
 <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
 	rel="stylesheet" />
 <link type="text/css" rel="stylesheet"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/styleadmin.css" />
+	href="resources/css/styleadmin.css" />
 <style type="text/css">
 .form-container {
 	width: 100%;
@@ -156,7 +156,7 @@
 		</div>
 		<ul class="nav-links">
 			<!-- Sidebar Navigation -->
-			<li><a href="#"> <i class="bx bx-grid-alt"></i> <span
+			<li><a href="dashboard"> <i class="bx bx-grid-alt"></i> <span
 					class="links_name">Dashboard</span>
 			</a></li>
 

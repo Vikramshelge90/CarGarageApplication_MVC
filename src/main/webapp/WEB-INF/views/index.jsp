@@ -14,20 +14,20 @@
 <meta name="author" content="">
 <!-- bootstrap css -->
 <link rel="stylesheet"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/bootstrap.min.css">
+	href="resources/css/bootstrap.min.css">
 <!-- style css -->
 <link rel="stylesheet"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/style.css">
+	href="resources/css/style.css">
 <!-- Responsive-->
 <link rel="stylesheet"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/responsive.css">
+	href="resources/css/responsive.css">
 <!-- fevicon -->
 <link rel="icon"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/images/fevicon.png"
+	href="resources/images/fevicon.png"
 	type="image/gif" />
 <!-- Scrollbar Custom CSS -->
 <link rel="stylesheet"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/jquery.mCustomScrollbar.min.css">
+	href="resources/css/jquery.mCustomScrollbar.min.css">
 <!-- Tweaks for older IEs-->
 <link rel="stylesheet"
 	href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -44,14 +44,7 @@
 </head>
 <!-- body -->
 <body class="main-layout">
-	<!-- loader  -->
-	<div class="loader_bg">
-		<div class="loader">
-			<img
-				src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/loading.gif"
-				alt="#" />
-		</div>
-	</div>
+	
 	<!-- end loader -->
 	<!-- header -->
 	<header>
@@ -65,7 +58,7 @@
 								<div class="logo">
 									<a class="navbar-brand" href="#" style="color: white"><i
 										class="fa-solid fa-car-on"></i> GoGarage AutoMobs</a>
-									<!-- <a href="index.html"><img src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/logo.png" alt="#" /></a> -->
+									<!-- <a href="index.html"><img src="resources/images/logo.png" alt="#" /></a> -->
 								</div>
 							</div>
 						</div>
@@ -151,7 +144,7 @@
 									<div class="text_img">
 										<figure>
 											<img
-												src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/car.png"
+												src="resources/images/car.png"
 												alt="#" />
 										</figure>
 									</div>
@@ -179,7 +172,7 @@
 									<div class="text_img">
 										<figure>
 											<img
-												src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/car.png"
+												src="resources/images/car.png"
 												alt="#" />
 										</figure>
 									</div>
@@ -207,7 +200,7 @@
 									<div class="text_img">
 										<figure>
 											<img
-												src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/car.png"
+												src="resources/images/car.png"
 												alt="#" />
 										</figure>
 									</div>
@@ -237,7 +230,7 @@
 					<div class="box_text">
 						<h3>AUTO DIAGNOSE</h3>
 						<i><img
-							src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/thr.png"
+							src="resources/images/thr.png"
 							alt="#" /></i>
 						<p>ipsum dolor sit amet, consectetur adipiscing elit, sed d
 							veniam, adipiscing elit, sed d veniam</p>
@@ -247,7 +240,7 @@
 					<div class="box_text">
 						<h3>AUTO DIAGNOSE</h3>
 						<i><img
-							src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/thr1.png"
+							src="resources/images/thr1.png"
 							alt="#" /></i>
 						<p>ipsum dolor sit amet, consectetur adipiscing elit, sed d
 							veniam, adipiscing elit, sed d veniam</p>
@@ -257,7 +250,7 @@
 					<div class="box_text">
 						<h3>AUTO DIAGNOSE</h3>
 						<i><img
-							src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/thr2.png"
+							src="resources/images/thr2.png"
 							alt="#" /></i>
 						<p>ipsum dolor sit amet, consectetur adipiscing elit, sed d
 							veniam, adipiscing elit, sed d veniam</p>
@@ -315,7 +308,7 @@
 							<div class="work">
 								<figure>
 									<img
-										src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/img1.png"
+										src="resources/images/img1.png"
 										alt="#" />
 								</figure>
 							</div>
@@ -329,7 +322,7 @@
 							<div class="work">
 								<figure>
 									<img
-										src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/img2.png"
+										src="resources/images/img2.png"
 										alt="#" />
 								</figure>
 							</div>
@@ -346,7 +339,7 @@
 							<div class="work">
 								<figure>
 									<img
-										src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/img3.png"
+										src="resources/images/img3.png"
 										alt="#" />
 								</figure>
 							</div>
@@ -360,7 +353,7 @@
 							<div class="work">
 								<figure>
 									<img
-										src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/img4.png"
+										src="resources/images/img4.png"
 										alt="#" />
 								</figure>
 							</div>
@@ -399,7 +392,7 @@
 							<div class="carousel-item active">
 								<div class="test_box">
 									<i><img
-										src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/tes.jpg"
+										src="resources/images/tes.jpg"
 										alt="#" /></i>
 									<h4>Vikram Shelge</h4>
 									<p>It is a long established fact...</p>
@@ -470,7 +463,7 @@
 						<div class="map">
 							<figure>
 								<img
-									src="/CarGarageApplicationMVC/URLToReachResourceFolder/images/map.jpg"
+									src="resources/images/map.jpg"
 									alt="#" />
 							</figure>
 						</div>
@@ -497,12 +490,12 @@
 	<!-- footer -->
 	<!-- scripts -->
 	<script
-		src="/CarGarageApplicationMVC/URLToReachResourceFolder/js/jquery.min.js"></script>
+		src="resources/js/jquery.min.js"></script>
 	<script
-		src="/CarGarageApplicationMVC/URLToReachResourceFolder/js/popper.min.js"></script>
+		src="resources/js/popper.min.js"></script>
 	<script
-		src="/CarGarageApplicationMVC/URLToReachResourceFolder/js/bootstrap.bundle.min.js"></script>
+		src="resources/js/bootstrap.bundle.min.js"></script>
 	<script
-		src="/CarGarageApplicationMVC/URLToReachResourceFolder/js/custom.js"></script>
+		src="resources/js/custom.js"></script>
 </body>
 </html>

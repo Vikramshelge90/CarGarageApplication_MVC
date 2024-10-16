@@ -1,7 +1,6 @@
 package mvc.cgapp.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import mvc.cgapp.model.CustomerLoginModel;
 import mvc.cgapp.model.UserDetailsModel;
 import mvc.cgapp.service.CustomerLoginService;

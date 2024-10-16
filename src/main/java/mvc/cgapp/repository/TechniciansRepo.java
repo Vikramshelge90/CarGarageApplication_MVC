@@ -8,5 +8,7 @@ public interface TechniciansRepo {
 
 	List<TechniciansModel> getAllTechnicians();
 	List<TechniciansModel> getTechniciansByName(String tname);
+	int addNewTechie(TechniciansModel techniciansModel);
+	TechniciansModel getSelectedTechieByTid(int tid);
 	
 }

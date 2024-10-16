@@ -12,7 +12,9 @@
 <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
 	rel="stylesheet" />
 <link type="text/css" rel="stylesheet"
-	href="/CarGarageApplicationMVC/URLToReachResourceFolder/css/styleadmin.css" />
+	href="resources/css/styleadmin.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 <style type="text/css">
@@ -231,18 +233,16 @@
 				AutoMobs</span>
 		</div>
 		<ul class="nav-links">
-			<li><a href="#"> <i class="bx bx-grid-alt"></i> <span
+			<li><a href="dashboard"> <i class="bx bx-grid-alt"></i> <span
 					class="links_name">Dashboard</span>
 			</a></li>
 
-			<li><a href="adminside" > <i
-					class='bx bxs-group'></i> <span class="links_name">Customers
-						Section</span>
+			<li><a href="adminside"> <i class='bx bxs-group'></i> <span
+					class="links_name">Customers Section</span>
 			</a></li>
 
-			<li><a href="carpage"> <i
-					class='bx bxs-car-mechanic'></i> <span class="links_name">Cars
-						Section</span>
+			<li><a href="carpage"> <i class='bx bxs-car-mechanic'></i> <span
+					class="links_name">Cars Section</span>
 			</a></li>
 
 
@@ -254,18 +254,18 @@
 			<li><a href="sparePartspage"> <i class="bx bx-wrench"></i> <span
 					class="links_name">Spare Parts</span>
 			</a></li>
-			<li><a href="techiepage" class="active"> <i class="bx bxs-group"></i> <span
-					class="links_name">Technician</span>
+			<li><a href="techiepage" class="active"> <i
+					class="bx bxs-group"></i> <span class="links_name">Technician</span>
 			</a></li>
-			
+
 			<li><a href="billingPage"> <i class="bx bxs-receipt"></i> <span
 					class="links_name">Billing</span>
 			</a></li>
 			<li><a href="#"> <i class='bx bxs-report'></i> <span
 					class="links_name">Reports</span>
 			</a></li>
-			<li class="log_out"><a href="logoutbtn"> <i class="bx bx-log-out"></i>
-					<span class="links_name">Log out</span>
+			<li class="log_out"><a href="logoutbtn"> <i
+					class="bx bx-log-out"></i> <span class="links_name">Log out</span>
 			</a></li>
 		</ul>
 	</div>
@@ -301,33 +301,34 @@
 				<div class="recent-sales box">
 
 
-					<form:form action="processform" method="POST"
-						modelAttribute="userDetails" id="userForm">
+					<%-- 					<form:form action="processform" method="POST"
+						modelAttribute="userDetails" id="userForm"> --%>
 
-						<!-- Name Field -->
-						<div class="form-group">
-							<label for="inputVehicleNPlate">Search Techie by Name</label> <input type="text" id="techiefield"
-								name="vehiclenplate"
-								placeholder="Enter Vehicle Registered number"
-								onkeyup="searchTechie()" /> <span id="techieError"
-								style="color: red; display: none;">No Technician found</span>
-						</div>
+					<!-- Name Field -->
+					<div class="form-group">
+						<label for="inputVehicleNPlate">Search Techie by Name</label> <input
+							type="text" id="techiefield" name="vehiclenplate"
+							placeholder="Enter Vehicle Registered number"
+							value="${techie.tname}" onkeyup="searchTechie()" /> <span
+							id="techieError" style="color: red; display: none;">No
+							Technician found</span>
+					</div>
 
-						
 
+					<%-- 
 						<!-- Submit Button (Disabled by default) -->
 						<div class="button-container">
 							<button type="submit">Search</button>
 						</div>
-					</form:form>
+					</form:form> --%>
 				</div>
 			</div>
 			<div class="sales-boxes" style="margin-top: 20px;">
 				<div class="recent-sales box">
 					<!-- Table responsive wrapper -->
 					<div class="disptable" style="margin-top: 30px;">
-						<table id="resultsTable" class="table"
-							><thead>
+						<table id="resultsTable" class="table">
+							<thead>
 								<tr class=" table-success">
 									<th scope="col">Sr no.</th>
 									<th scope="col">Technician Name</th>
@@ -340,12 +341,12 @@
 								%>
 								<c:forEach var="techie" items="${techies}">
 									<tr>
-										<td><a href="updateSavefortechie?techieID=${techie.tid}"
+										<td><a href="#"
 											type="button" class="btn btn-info btn-sm"
 											style="color: white; text-decoration: none"><%=++count%></a></td>
 										<td>${techie.tname}</td>
 
-										</tr>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -412,9 +413,50 @@
 	        } 
 	    }
 	    
+	    $(document).ready(function() {
+	        // Fetch all data when the page loads
+	        searchTechie();
+
+	        // Attach event handlers for form input fields
+	        $('#techiefield').on('keyup', searchTechie);
+	    });
 	    
 	    
-		function searchTechie() {
+	    function searchTechie() {
+	        var tname = $('#techiefield').val().trim();
+
+	        // Prepare an AJAX request
+	        $.ajax({
+	            url: 'searchForTechie', // Controller endpoint to process the form
+	            type: 'POST',
+	            dataType: 'json', // Expect JSON from the server
+	            data: {
+	                tname: tname || null,   // Send null for empty fields
+	                
+	            },
+	            success: function(response) {
+	                // Clear the existing table rows
+	                $("tbody").empty();
+
+	                // Append new rows to the table from the response
+	                response.forEach(function(techie, index) {
+	                    var row = '<tr>' +
+	                    '<td><a href="#" type="button" class="btn btn-info btn-sm" style="color: white; text-decoration: none">' + (index + 1) + '</a></td>' +
+	                     '<td>' + (techie.tname || '') + '</td>'+
+	                        '</tr>';
+	                    $("tbody").append(row);
+	                });
+	            },
+	            error: function() {
+	                console.log('Error retrieving data.');
+	            }
+	        });
+	    }
+
+	    
+	    
+	    
+		/* function searchTechie() {
 		    const tname = document.getElementById('techiefield').value;
 		    const errorMsg = document.getElementById('techieError');
 		    const resultsTable = document.getElementById('resultsTable').getElementsByTagName('tbody')[0];
@@ -458,7 +500,7 @@
 		        resultsTable.innerHTML = ''; // Clear table when input is cleared
 		        errorMsg.style.display = 'none'; // Hide error message when input is empty
 		    }
-		}
+		} */
 	    
 	</script>
 

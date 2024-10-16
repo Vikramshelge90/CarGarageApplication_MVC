@@ -95,6 +95,13 @@ public class UserHandleController {
 //		return "admin";
 //	}
 
+	@RequestMapping("dashboard")
+	public String dashBoard() {
+		
+		return "DashBoard";
+	}
+	
+	
 	@PostMapping("/processform")
 	@ResponseBody // This ensures the method returns a JSON response
 	public List<UserDetailsModel> processFormAjax(@RequestParam(required = false) String username,

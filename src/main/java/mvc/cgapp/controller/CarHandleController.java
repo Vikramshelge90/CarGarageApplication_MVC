@@ -2,7 +2,6 @@ package mvc.cgapp.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jakarta.servlet.http.HttpSession;
 import mvc.cgapp.model.TechniciansModel;
 import mvc.cgapp.model.UserDetailsModel;
 import mvc.cgapp.model.VehicleFormModel;
@@ -49,42 +49,6 @@ public class CarHandleController {
 	}
 	
 	
-	
-//	@RequestMapping("/cardetails")
-//	public String carDetails(@ModelAttribute("carDetails") VehicleFormModel vehicleFormModel, Model model) {
-//		List<TechniciansModel> getalltechies = techniciansService.getAllTechnicians();
-//		model.addAttribute("techies", getalltechies);
-//		return "CarDetails";
-//	}
-
-	
-	
-	
-	
-//	@PostMapping("searchcar")
-//	public String searchCar(VehicleFormModel vehicleFormModel, Model model) {
-//
-//		List<TechniciansModel> getalltechies = techniciansService.getAllTechnicians();
-//
-//		model.addAttribute("techies", getalltechies);
-//		
-//		if (vehicleFormModel.getVehiclemodel().isEmpty() && vehicleFormModel.getVehiclenplate().isEmpty()
-//				&& vehicleFormModel.getVisitVentryDate().isEmpty() && vehicleFormModel.getTname() == null) {
-//			List<VehicleFormModel> gettingAllCars = userVehicleService.getAllCars();
-//			model.addAttribute("vehicles", gettingAllCars);
-//		} else {
-//			List<VehicleFormModel> gettingSelectedCars = userVehicleService.getSelectedCars(vehicleFormModel);
-//			
-//			model.addAttribute("carinfo", vehicleFormModel);
-//			model.addAttribute("vehicles", gettingSelectedCars);
-//		}
-//
-//		return "carpage";
-//		/* return "CarDetails"; */
-//	}
-
-	
-	
 	@PostMapping("/searchcar")
 	@ResponseBody
 	public List<VehicleFormModel> searchCar(
@@ -106,13 +70,6 @@ public class CarHandleController {
 	    return filteredVehicles;
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	
 	@PostMapping("/submitformforvehicle")
 	public String processFormForCar(VehicleFormModel vehicleFormModel, @RequestParam("UserIDCustomer") String userid,
@@ -153,7 +110,6 @@ public class CarHandleController {
 		model.addAttribute("techies", getalltechies);
 		
 		return "carpage3";
-		//return "addvehiclepage";
 	}
 	
 	@GetMapping("/checkVehicleNumber")
@@ -189,12 +145,9 @@ public class CarHandleController {
 			model.addAttribute("msg","data not added");
 		}
 		return "carpage3";
-		//return "addvehiclepage";
+
 	}
-	
-	
-	
-	
+
 	
 	@RequestMapping("/updateforcar")
 	public String updateForCar(@RequestParam("VisitID") int vvid,Model model,@ModelAttribute("userinfo") UserDetailsModel userDetailsModel,HttpSession session) {
@@ -216,10 +169,6 @@ public class CarHandleController {
 			return "redirect:/searchcar";
 		}
 		
-		
-		
-		
-		/* return "carupdatepage"; */
 	}
 
 	@PostMapping("/goingtoupdatecar")
@@ -256,7 +205,7 @@ public class CarHandleController {
 		model.addAttribute("customer",selectedUser);
 		
 		return "carpage2";
-		/* return "carupdatepage"; */
+		
 	}
 	
 	@PostMapping("/addcustomermodal")
@@ -272,10 +221,7 @@ public class CarHandleController {
 			model.addAttribute("customer",selectedUser);
 		}		
 		return "carpage2";
-		/* return "carupdatepage"; */
 	}
-	
-	
 	
 	
 	@PostMapping("/submitformforvehiclenduser")
@@ -294,14 +240,7 @@ public class CarHandleController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@RequestMapping("/deleteVehicle")
 	@ResponseBody
 	public String confirmDeleteForVehicle(@RequestParam("vvID") int vvid) {
